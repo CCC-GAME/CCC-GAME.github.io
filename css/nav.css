@@ -1,0 +1,17 @@
+nav {
+    padding: 30px 40px;
+    border-bottom: 2px solid var(--accent);
+    position: sticky; top: 0; background: var(--bg); z-index: 100;
+}
+.nav-content { display: flex; justify-content: center; position: relative; max-width: 1400px; margin: 0 auto; }
+.nav-brand { position: absolute; left: 0; font-size: 18px; letter-spacing: 2px; }
+.nav-btn {
+    background: none; border: none; color: inherit; font: inherit;
+    cursor: pointer; margin: 0 20px; opacity: 0.4; transition: 0.3s;
+}
+.nav-btn.active { opacity: 1; border-bottom: 2px solid var(--accent); }
+.theme-switcher { position: absolute; right: 0; cursor: pointer; font-size: 12px; }
+.divider { opacity: 0.3; margin: 0 5px; }
+.underline { position: absolute; bottom: -5px; height: 2px; background: var(--accent); transition: 0.3s; }
+.dark-theme .underline { left: 0; width: 45px; }
+.light-theme .underline { left: 58px; width: 45px; }

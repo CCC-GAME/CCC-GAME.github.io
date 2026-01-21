@@ -1,0 +1,45 @@
+footer { 
+    border-top: 4px solid var(--accent); 
+    padding: 80px 40px; 
+    margin-top: 100px;
+    
+    /* ИСПОЛЬЗУЕМ ПЕРЕМЕННЫЕ, ЧТОБЫ ЦВЕТ МЕНЯЛСЯ */
+    background-color: var(--bg);
+    color: var(--text);
+    
+    position: relative;
+    z-index: 10;
+}
+
+.footer-content { 
+    max-width: 1400px; 
+    margin: 0 auto; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 40px; 
+}
+.large-footer-logo { 
+    height: 120px; 
+    transition: 0s; 
+    filter: invert(0); 
+}
+
+body.light-theme .large-footer-logo {
+    filter: invert(1);
+}
+
+.f-links a { 
+    color: var(--text); /* Цвет текста зависит от темы */
+    text-decoration: none; 
+    margin: 0 20px; 
+    font-size: 14px; 
+    letter-spacing: 2px; 
+    opacity: 0.6; 
+    transition: 0.3s;
+}
+
+.f-links a:hover { opacity: 1; color: var(--accent); }
+
+.page-title { border-left: 10px solid var(--accent); padding-left: 20px; margin-top: 60px; text-transform: uppercase; }
+.badge { background: var(--accent); color: var(--bg); padding: 5px 10px; font-size: 10px; margin-bottom: 10px; display: inline-block; }

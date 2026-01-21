@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN PANEL - CCC GAME</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial Black', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            /* Сетка на фоне как в редакторе */
+            background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .admin-panel {
+            background: #0a0a0a;
+            border: 2px solid #333;
+            padding: 40px;
+            width: 500px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        h1 { margin-top: 0; color: #4CAF50; text-transform: uppercase; font-size: 24px; }
+        
+        label { display: block; margin-top: 20px; font-size: 12px; color: #888; letter-spacing: 1px; }
+        
+        input, select, textarea {
+            width: 100%;
+            background: #111;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 10px;
+            margin-top: 5px;
+            font-family: monospace;
+        }
+
+        button {
+            background: #4CAF50;
+            color: #000;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            margin-top: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover { background: #45a049; }
+
+        .result-box {
+            margin-top: 30px;
+            background: #1a1a1a;
+            border: 1px dashed #444;
+            padding: 15px;
+            position: relative;
+            display: none; /* Скрыто пока не нажмешь кнопку */
+        }
+
+        code { color: #aaa; word-break: break-all; font-family: monospace; font-size: 12px; }
+        
+        .copy-hint {
+            color: #4CAF50;
+            font-size: 12px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-panel">
+        <h1>Add New Game</h1>
+        
+        <label>ТИП ИГРЫ</label>
+        <select id="gameType">
+            <option value="new">NEW GAME (Новая)</option>
+            <option value="dev">IN DEVELOPMENT (В разработке)</option>
+            <option value="archive">OLD PROJECT (Архив)</option>
+        </select>
+
+        <label>НАЗВАНИЕ</label>
+        <input type="text" id="gName" placeholder="Например: SUPER TANK">
+
+        <label>ОПИСАНИЕ</label>
+        <input type="text" id="gDesc" placeholder="Короткое описание...">
+
+        <label>КАРТИНКА (Имя файла или текст)</label>
+        <input type="text" id="gImage" placeholder="image/game3.jpg или COMING SOON">
+
+        <label>ССЫЛКА (Если есть)</label>
+        <input type="text" id="gLink" placeholder="#" value="#">
+
+        <button onclick="generateCode()">СГЕНЕРИРОВАТЬ КОД</button>
+
+        <div class="result-box" id="result">
+            <div class="copy-hint">СКОПИРУЙ ЭТО И ВСТАВЬ В games_data.js:</div>
+            <code id="codeOutput"></code>
+        </div>
+    </div>
+
+    <script>
+        function generateCode() {
+            const type = document.getElementById('gameType').value;
+            const name = document.getElementById('gName').value;
+            const desc = document.getElementById('gDesc').value;
+            let image = document.getElementById('gImage').value;
+            const link = document.getElementById('gLink').value;
+
+            // Если картинки нет, ставим заглушку
+            if (!image) image = "NO IMAGE";
+
+            let code = `
+        {
+            name: "${name}",
+            desc: "${desc}",
+            image: "${image}",
+            link: "${link}",`;
+
+            // Добавляем спец. настройки для разделов
+            if (type === 'dev') {
+                code += `
+            isTextOnly: ${image.includes('/') ? 'false' : 'true'} 
+        },`;
+            } else if (type === 'archive') {
+                code += `
+            isTextOnly: ${image.includes('/') ? 'false' : 'true'},
+            isDownload: true
+        },`;
+            } else {
+                code += `
+        },`;
+            }
+
+            document.getElementById('codeOutput').innerText = code;
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

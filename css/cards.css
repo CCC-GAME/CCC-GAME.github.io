@@ -1,0 +1,115 @@
+/* --- ГЛАВНАЯ ИГРА (HERO) --- */
+.hero-card {
+    position: relative;
+    height: 550px;
+    background: var(--gray);
+    border: 3px solid var(--accent);
+    overflow: hidden;
+    margin-bottom: 60px;
+    transition: 0.3s ease;
+}
+
+/* Эффект наведения на карточку (Тот, что тебе понравился) */
+.hero-card:hover {
+    box-shadow: 12px 12px 0px var(--accent);
+    transform: translate(-6px, -6px);
+}
+
+.hero-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.5s; }
+.hero-card:hover .hero-img { opacity: 0.8; }
+
+.hero-overlay { 
+    position: absolute; inset: 0; 
+    background: linear-gradient(to top, var(--bg) 15%, transparent); 
+    display: flex; align-items: flex-end; padding: 50px; 
+}
+
+/* --- ЕДИНАЯ АНИМАЦИЯ КНОПОК (PLAY) --- */
+.primary-btn, .play-mini-btn {
+    background: var(--accent); 
+    color: var(--bg); 
+    border: none;
+    padding: 12px 35px; 
+    font-weight: bold; 
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    /* Только плавное увеличение */
+    transition: transform 0.2s ease; 
+}
+
+.primary-btn { padding: 15px 45px; letter-spacing: 1px; }
+
+/* При наведении просто увеличиваем */
+.primary-btn:hover, .play-mini-btn:hover {
+    transform: scale(1.08); 
+}
+
+/* При нажатии чуть уменьшаем (клик) */
+.primary-btn:active, .play-mini-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- ИКОНКА ДОКУМЕНТА (Твоя картинка) --- */
+.doc-img {
+    height: 35px; width: auto; display: block; transition: 0.3s;
+    filter: invert(var(--doc-inv, 0));
+}
+.light-theme { --doc-inv: 1; }
+.dark-theme { --doc-inv: 0; }
+
+.file-icon-btn { display: inline-block; transition: 0.2s; }
+/* При наведении на иконку тоже увеличение */
+.file-icon-btn:hover { transform: scale(1.15); }
+
+/* --- СЕТКИ И СЕКЦИИ --- */
+/* Добавь это в конец css/cards.css */
+.game-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding-bottom: 50px; /* Отступ снизу, чтобы игры не прилипали к футеру */
+    width: 100%;
+}
+
+.game-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    gap: 25px; 
+    margin-top: 25px; 
+}
+
+/* Маленькие карточки (Эффект сохранен) */
+.mini-card { 
+    border: 3px solid var(--accent); 
+    padding: 15px; 
+    position: relative; 
+    background: var(--bg); 
+    transition: 0.3s ease; 
+}
+
+.mini-card:hover { 
+    box-shadow: 8px 8px 0px var(--accent); 
+    transform: translate(-4px, -4px); 
+}
+
+.m-img { 
+    height: 160px; 
+    background: var(--gray); 
+    border: none;
+    margin-bottom: 15px; 
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 12px; letter-spacing: 1px; 
+}
+
+.card-controls { display: flex; align-items: center; gap: 20px; margin-top: 15px; }
+
+/* Кнопка Share */
+.share-btn {
+    position: absolute; top: 15px; right: 15px; 
+    background: var(--accent); color: var(--bg);
+    border: none; width: 40px; height: 40px; border-radius: 50%; 
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; z-index: 10; transition: 0.2s;
+}
+.share-btn:hover { transform: scale(1.15); }
